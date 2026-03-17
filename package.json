@@ -7,12 +7,11 @@
   "type": "module",
   "main": "server.ts",
   "scripts": {
-    "dev": "npm run build && node --experimental-strip-types server.ts",
-    "dev:client": "vite",
-    "dev:server": "node --experimental-strip-types server.ts",
+    "dev": "concurrently --kill-others \"node --experimental-strip-types server.ts\" \"vite --host\"",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "node --experimental-strip-types server.ts"
+    "start": "concurrently --kill-others \"node --experimental-strip-types server.ts\" \"vite --host\"",
+    "start:prod": "npm run build && node --experimental-strip-types server.ts"
   },
   "dependencies": {
     "express": "^4.18.2",
@@ -24,6 +23,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^9.2.1",
     "vite": "^5.1.4"
   }
 }
